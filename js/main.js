@@ -69,39 +69,31 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const burgerMenu = document.querySelector('.burger-menu');
     const navLinks = document.querySelector('.nav-links');
-    const navLinksItems = document.querySelectorAll('.nav-links li');
 
-    // Toggle navigation
-    burgerMenu.addEventListener('click', () => {
-        // Toggle navigation
-        navLinks.classList.toggle('active');
-        burgerMenu.classList.toggle('active');
+    if (burgerMenu) {  // Check if burger menu exists
+        burgerMenu.addEventListener('click', function(e) {
+            e.stopPropagation();  // Prevent event from bubbling
+            burgerMenu.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
 
-        // Animate links
-        navLinksItems.forEach((link, index) => {
-            if (link.style.animation) {
-                link.style.animation = '';
-            } else {
-                link.style.animation = `navLinkFade 0.5s ease forwards ${index * 0.1 + 0.3}s`;
+        // Close menu when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!navLinks.contains(e.target) && !burgerMenu.contains(e.target)) {
+                burgerMenu.classList.remove('active');
+                navLinks.classList.remove('active');
             }
         });
-    });
 
-    // Close menu when clicking outside
-    document.addEventListener('click', (e) => {
-        if (!navLinks.contains(e.target) && !burgerMenu.contains(e.target) && navLinks.classList.contains('active')) {
-            navLinks.classList.remove('active');
-            burgerMenu.classList.remove('active');
-        }
-    });
-
-    // Close menu when clicking a link
-    navLinksItems.forEach(item => {
-        item.addEventListener('click', () => {
-            navLinks.classList.remove('active');
-            burgerMenu.classList.remove('active');
+        // Close menu when clicking a link
+        const navLinksItems = document.querySelectorAll('.nav-links a');
+        navLinksItems.forEach(item => {
+            item.addEventListener('click', () => {
+                burgerMenu.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
         });
-    });
+    }
 });
 
 @keyframes navLinkFade {
