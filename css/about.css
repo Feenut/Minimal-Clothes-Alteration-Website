@@ -22,6 +22,9 @@
     color: var(--primary-color);
     font-size: 2.5rem;
     margin-bottom: 3rem;
+    opacity: 0;
+    transform: translateY(-30px);
+    animation: fadeInDown 0.8s ease forwards;
 }
 
 .about-content {
@@ -56,13 +59,16 @@
 .about-text {
     opacity: 0;
     transform: translateX(30px);
-    animation: fadeInLeft 1s ease forwards 0.3s;
+    animation: fadeInLeft 0.8s ease forwards 0.3s;
 }
 
 .about-text h2 {
     color: var(--primary-color);
     font-size: 2rem;
     margin-bottom: 1rem;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s ease forwards 0.4s;
 }
 
 .about-text h3 {
@@ -70,6 +76,9 @@
     font-size: 1.2rem;
     margin-bottom: 1.5rem;
     font-weight: 500;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s ease forwards 0.5s;
 }
 
 .about-text p {
@@ -77,6 +86,9 @@
     line-height: 1.8;
     color: #666;
     margin-bottom: 2rem;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s ease forwards 0.6s;
 }
 
 .experience-highlights {

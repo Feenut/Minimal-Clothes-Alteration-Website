@@ -66,4 +66,51 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initial check for elements in view
     handleScrollAnimation();
-}); 
+
+    const burgerMenu = document.querySelector('.burger-menu');
+    const navLinks = document.querySelector('.nav-links');
+    const navLinksItems = document.querySelectorAll('.nav-links li');
+
+    // Toggle navigation
+    burgerMenu.addEventListener('click', () => {
+        // Toggle navigation
+        navLinks.classList.toggle('active');
+        burgerMenu.classList.toggle('active');
+
+        // Animate links
+        navLinksItems.forEach((link, index) => {
+            if (link.style.animation) {
+                link.style.animation = '';
+            } else {
+                link.style.animation = `navLinkFade 0.5s ease forwards ${index * 0.1 + 0.3}s`;
+            }
+        });
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!navLinks.contains(e.target) && !burgerMenu.contains(e.target) && navLinks.classList.contains('active')) {
+            navLinks.classList.remove('active');
+            burgerMenu.classList.remove('active');
+        }
+    });
+
+    // Close menu when clicking a link
+    navLinksItems.forEach(item => {
+        item.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+            burgerMenu.classList.remove('active');
+        });
+    });
+});
+
+@keyframes navLinkFade {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+} 
