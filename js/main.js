@@ -68,41 +68,43 @@ document.addEventListener('DOMContentLoaded', function() {
     handleScrollAnimation();
 
     // Mobile menu functionality
-    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
-
-    if (mobileMenuBtn) {
-        mobileMenuBtn.addEventListener('click', function(e) {
-            e.stopPropagation(); // Prevent event bubbling
+    
+    if (hamburger && navLinks) {
+        const menuIcon = hamburger.querySelector('i');
+        
+        hamburger.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
             navLinks.classList.toggle('active');
-            const icon = this.querySelector('i');
+            
+            // Toggle menu icon
             if (navLinks.classList.contains('active')) {
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-times');
+                menuIcon.classList.remove('fa-bars');
+                menuIcon.classList.add('fa-times');
             } else {
-                icon.classList.add('fa-bars');
-                icon.classList.remove('fa-times');
+                menuIcon.classList.add('fa-bars');
+                menuIcon.classList.remove('fa-times');
             }
         });
 
         // Close menu when clicking a link
-        const navItems = document.querySelectorAll('.nav-links a');
-        navItems.forEach(item => {
-            item.addEventListener('click', () => {
+        const links = document.querySelectorAll('.nav-links a');
+        links.forEach(link => {
+            link.addEventListener('click', () => {
                 navLinks.classList.remove('active');
-                const icon = mobileMenuBtn.querySelector('i');
-                icon.classList.add('fa-bars');
-                icon.classList.remove('fa-times');
+                menuIcon.classList.add('fa-bars');
+                menuIcon.classList.remove('fa-times');
             });
         });
 
         // Close menu when clicking outside
         document.addEventListener('click', function(e) {
-            if (!navLinks.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+            if (!navLinks.contains(e.target) && !hamburger.contains(e.target)) {
                 navLinks.classList.remove('active');
-                const icon = mobileMenuBtn.querySelector('i');
-                icon.classList.add('fa-bars');
-                icon.classList.remove('fa-times');
+                menuIcon.classList.add('fa-bars');
+                menuIcon.classList.remove('fa-times');
             }
         });
     }
