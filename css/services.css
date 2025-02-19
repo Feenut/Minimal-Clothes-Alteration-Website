@@ -152,7 +152,7 @@
     transform: translateY(-2px);
 }
 
-/* Modal Styles with Animations */
+/* Modal Styles with Improved Mobile Scaling */
 .modal {
     display: none;
     position: fixed;
@@ -164,7 +164,7 @@
     z-index: 1000;
     opacity: 0;
     transition: opacity 0.3s ease;
-    overflow-y: auto; /* Enable scrolling */
+    overflow-y: auto;
 }
 
 .modal.show {
@@ -175,11 +175,12 @@
 .modal-content {
     position: relative;
     background: white;
-    width: 90%;
+    width: 95%;
     max-width: 800px;
     margin: 20px auto;
-    border-radius: 20px;
-    overflow: hidden;
+    border-radius: 15px;
+    overflow-y: auto;
+    max-height: 85vh;
     transform: translateY(20px);
     opacity: 0;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -373,34 +374,114 @@
     }
 
     .modal-content {
-        width: 95%;
-        margin: 10px auto;
+        width: 90%;
+        margin: 15px auto;
+        max-height: 80vh;
     }
 
     .service-title-banner {
-        padding: 1.5rem;
+        position: sticky;
+        top: 0;
+        padding: 1rem;
+        z-index: 2;
     }
 
     .service-title-banner h2 {
-        font-size: 1.5rem;
+        font-size: 1.4rem;
     }
 
     .modal-body {
-        padding: 1.5rem;
+        padding: 1rem;
+        overflow-y: auto;
     }
 
-    .price-list,
-    .features {
-        padding: 1.5rem;
+    .price-list {
+        margin: 1rem 0;
+        padding: 1rem;
+    }
+
+    .price-list li {
+        padding: 0.8rem 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .price-list li span {
+        font-size: 0.9rem;
     }
 
     .features ul {
         grid-template-columns: 1fr;
+        gap: 0.8rem;
+        padding: 0 0.5rem;
     }
 
-    .price-list li,
     .features li {
-        font-size: 1rem;
+        font-size: 0.9rem;
+        padding-left: 1.5rem;
+        line-height: 1.4;
+    }
+
+    .close-modal {
+        top: 0.5rem;
+        right: 0.5rem;
+        width: 28px;
+        height: 28px;
+        font-size: 1.1rem;
+    }
+}
+
+/* Small Mobile Adjustments */
+@media (max-width: 480px) {
+    .modal-content {
+        width: 95%;
+        margin: 10px auto;
+        max-height: 85vh;
+    }
+
+    .modal-body {
+        padding: 0.8rem;
+    }
+
+    .modal-body p {
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+    }
+
+    .price-list,
+    .features {
+        margin: 0.8rem 0;
+    }
+
+    .price-list h3,
+    .features h3 {
+        font-size: 1.1rem;
+        margin-bottom: 0.8rem;
+    }
+
+    .price-list li {
+        font-size: 0.85rem;
+        padding: 0.6rem 0;
+    }
+
+    .price-list li span:first-child {
+        width: 60%;
+    }
+
+    .price-list li span:last-child {
+        width: 40%;
+        text-align: right;
+    }
+
+    .close-modal {
+        top: 0.5rem;
+        right: 0.5rem;
+        width: 28px;
+        height: 28px;
+        font-size: 1.1rem;
     }
 }
 
