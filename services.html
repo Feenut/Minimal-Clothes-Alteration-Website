@@ -18,12 +18,10 @@
                 <i class="fas fa-scissors logo-icon"></i>
                 Perfect Fit
             </a>
-            <div class="burger-menu">
-                <div class="bar"></div>
-                <div class="bar"></div>
-                <div class="bar"></div>
+            <div class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
             </div>
-            <ul class="nav-links">
+            <ul class="nav-links" id="nav-links">
                 <li><a href="./index.html">Home</a></li>
                 <li><a href="./services.html" class="active">Services</a></li>
                 <li><a href="./about.html">About</a></li>
@@ -159,5 +157,13 @@
 
     <!-- Add before closing body tag -->
     <script src="./js/services.js"></script>
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('nav-links');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+    </script>
 </body>
 </html> 

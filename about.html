@@ -18,12 +18,10 @@
                 <i class="fas fa-scissors logo-icon"></i>
                 Perfect Fit
             </a>
-            <div class="burger-menu">
-                <div class="bar"></div>
-                <div class="bar"></div>
-                <div class="bar"></div>
+            <div class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
             </div>
-            <ul class="nav-links">
+            <ul class="nav-links" id="nav-links">
                 <li><a href="./index.html">Home</a></li>
                 <li><a href="./services.html">Services</a></li>
                 <li><a href="./about.html" class="active">About</a></li>
@@ -110,5 +108,13 @@
             <p>&copy; 2024 Perfect Fit Alterations. All rights reserved.</p>
         </div>
     </footer>
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('nav-links');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+    </script>
 </body>
 </html> 

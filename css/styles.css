@@ -61,7 +61,7 @@ nav {
 }
 
 .logo {
-    font-size: 1.6rem;
+    font-size: 2rem;
     font-weight: 700;
     letter-spacing: -0.03em;
     color: var(--primary-color);
@@ -385,12 +385,27 @@ footer {
     }
 
     .nav-links {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.5rem;
-        justify-content: center;
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        background-color: white;
         width: 100%;
-        margin-top: 0.5rem;
+        z-index: 1000;
+        opacity: 0;
+        transform: translateY(-20px);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .nav-links.active {
+        display: flex;
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .hamburger {
+        display: block;
     }
 
     .nav-links a {
@@ -1073,4 +1088,58 @@ select {
 .text-content {
     max-width: 65ch;
     margin: 0 auto;
+}
+
+/* Add this CSS to your existing styles.css */
+.hamburger {
+    display: none; /* Hide by default */
+    cursor: pointer;
+    font-size: 2rem; /* Increase the font size for the icon */
+    transition: transform 0.3s ease; /* Add transition for smooth effect */
+    margin-left: 10px; /* Move the hamburger icon a little to the left */
+}
+
+.hamburger i {
+    font-size: 2rem; /* Increase the icon size */
+}
+
+@media (max-width: 768px) {
+    .nav-links {
+        display: none; /* Hide links by default on mobile */
+        flex-direction: column; /* Stack links vertically */
+        position: absolute;
+        top: 60px; /* Adjust based on your header height */
+        left: 0;
+        background-color: white; /* Background color for dropdown */
+        width: 100%;
+        z-index: 1000; /* Ensure it appears above other content */
+        opacity: 0; /* Start hidden */
+        transform: translateY(-20px); /* Start slightly above */
+        transition: opacity 0.3s ease, transform 0.3s ease; /* Add transition */
+    }
+
+    .nav-links.active {
+        display: flex; /* Show links when active */
+        opacity: 1; /* Fade in */
+        transform: translateY(0); /* Slide down */
+    }
+
+    .hamburger {
+        display: block; /* Show hamburger icon on mobile */
+    }
+}
+
+/* Add keyframe animation for the hamburger icon */
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(90deg);
+    }
+}
+
+/* Add animation to the hamburger icon when clicked */
+.hamburger.active {
+    animation: rotate 0.3s ease forwards; /* Rotate animation */
 } 
