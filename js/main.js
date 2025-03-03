@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const header = document.querySelector('header');
     const scrollThreshold = 50;
     const animatedElements = document.querySelectorAll('.feature, .why-us-card, .step, .testimonial');
+    const lazyImages = document.querySelectorAll('img[loading="lazy"]');
 
     // Sticky header
     window.addEventListener('scroll', () => {
@@ -12,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Scroll animations
+    // Scroll animations with Intersection Observer for better performance
     const observerOptions = {
         root: null,
         rootMargin: '0px',
@@ -59,9 +60,16 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     };
     
-    // Add event listener for scroll
+    // Add event listener for scroll with throttling for better performance
+    let scrollTimeout;
     window.addEventListener('scroll', () => {
-        handleScrollAnimation();
+        if (scrollTimeout) {
+            window.cancelAnimationFrame(scrollTimeout);
+        }
+        
+        scrollTimeout = window.requestAnimationFrame(() => {
+            handleScrollAnimation();
+        });
     });
     
     // Initial check for elements in view
@@ -83,9 +91,13 @@ document.addEventListener('DOMContentLoaded', function() {
             if (navLinks.classList.contains('active')) {
                 menuIcon.classList.remove('fa-bars');
                 menuIcon.classList.add('fa-times');
+                // Add ARIA attributes for accessibility
+                hamburger.setAttribute('aria-expanded', 'true');
             } else {
                 menuIcon.classList.add('fa-bars');
                 menuIcon.classList.remove('fa-times');
+                // Update ARIA attributes
+                hamburger.setAttribute('aria-expanded', 'false');
             }
         });
 
@@ -96,6 +108,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 navLinks.classList.remove('active');
                 menuIcon.classList.add('fa-bars');
                 menuIcon.classList.remove('fa-times');
+                hamburger.setAttribute('aria-expanded', 'false');
             });
         });
 
@@ -105,7 +118,21 @@ document.addEventListener('DOMContentLoaded', function() {
                 navLinks.classList.remove('active');
                 menuIcon.classList.add('fa-bars');
                 menuIcon.classList.remove('fa-times');
+                hamburger.setAttribute('aria-expanded', 'false');
             }
+        });
+        
+        // Add ARIA attributes for accessibility
+        hamburger.setAttribute('aria-controls', 'nav-links');
+        hamburger.setAttribute('aria-expanded', 'false');
+        hamburger.setAttribute('aria-label', 'Toggle navigation menu');
+    }
+    
+    // Add lazy loading for images that don't have it
+    if ('loading' in HTMLImageElement.prototype) {
+        const images = document.querySelectorAll('img:not([loading])');
+        images.forEach(img => {
+            img.setAttribute('loading', 'lazy');
         });
     }
 });
